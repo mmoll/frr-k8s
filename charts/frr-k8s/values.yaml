@@ -23,14 +23,14 @@ rbac:
 
 prometheus:
   # scrape annotations specifies whether to add Prometheus metric
-  # auto-collection annotations to pods. See
+  # auto-collection annotations to the metrics Service. See
   # https://github.com/prometheus/prometheus/blob/release-2.1/documentation/examples/prometheus-kubernetes.yml
   # for a corresponding Prometheus configuration. Alternatively, you
   # may want to use the Prometheus Operator
   # (https://github.com/coreos/prometheus-operator) for more powerful
   # monitoring configuration. If you use the Prometheus operator, this
   # can be left at false.
-  # -- Add Prometheus metric auto-collection annotations to pods.
+  # -- Add Prometheus metric auto-collection annotations to the metrics Service.
   scrapeAnnotations: false
 
   # -- Port frr-k8s will listen on for secure metrics.

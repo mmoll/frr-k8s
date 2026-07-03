@@ -69,11 +69,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+{{- if or .Values.prometheus.scrapeAnnotations .Values.prometheus.serviceMonitor.annotations }}
   annotations:
+  {{- if .Values.prometheus.scrapeAnnotations }}
     prometheus.io/scrape: "true"
+  {{- end }}
   {{- if .Values.prometheus.serviceMonitor.annotations }}
 {{ toYaml .Values.prometheus.serviceMonitor.annotations | indent 4 }}
   {{- end }}
+{{- end }}
   labels:
     name: {{ template "frrk8s.fullname" . }}-frr-k8s-monitor-service
   name: {{ template "frrk8s.fullname" . }}-frr-k8s-monitor-service

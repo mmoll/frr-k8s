@@ -81,7 +81,7 @@ Kubernetes: `>= 1.19.0-0`
 | nameOverride | string | `""` | String to override the default chart name. |
 | prometheus.namespace | string | `""` | The namespace where Prometheus is deployed. Required when ".Values.prometheus.rbacPrometheus == true" and "prometheus.serviceMonitor.enabled=true". |
 | prometheus.rbacPrometheus | bool | `false` | Give Prometheus permission to scrape metallb's namespace. |
-| prometheus.scrapeAnnotations | bool | `false` | Add Prometheus metric auto-collection annotations to pods. |
+| prometheus.scrapeAnnotations | bool | `false` | Add Prometheus metric auto-collection annotations to the metrics Service. |
 | prometheus.secureMetricsPort | int | `9140` | Port frr-k8s will listen on for secure metrics. |
 | prometheus.serviceAccount | string | `""` | The service account used by Prometheus. Required when ".Values.prometheus.rbacPrometheus == true" and "prometheus.serviceMonitor.enabled=true" |
 | prometheus.serviceMonitor.additionalLabels | object | `{}` | Additional labels to add to the ServiceMonitor. |
