@@ -68,15 +68,17 @@ spec:
 ---
 apiVersion: v1
 kind: Service
+{{- $serviceAnnotations := dict }}
+{{- if .Values.prometheus.serviceMonitor.annotations }}
+  {{- $_ := merge $serviceAnnotations .Values.prometheus.serviceMonitor.annotations }}
+{{- end }}
+{{- if .Values.prometheus.scrapeAnnotations }}
+  {{- $_ := set $serviceAnnotations "prometheus.io/scrape" "true" }}
+{{- end }}
 metadata:
-{{- if or .Values.prometheus.scrapeAnnotations .Values.prometheus.serviceMonitor.annotations }}
+{{- if $serviceAnnotations }}
   annotations:
-  {{- if .Values.prometheus.scrapeAnnotations }}
-    prometheus.io/scrape: "true"
-  {{- end }}
-  {{- if .Values.prometheus.serviceMonitor.annotations }}
-{{ toYaml .Values.prometheus.serviceMonitor.annotations | indent 4 }}
-  {{- end }}
+{{ toYaml $serviceAnnotations | indent 4 }}
 {{- end }}
   labels:
     name: {{ template "frrk8s.fullname" . }}-frr-k8s-monitor-service
